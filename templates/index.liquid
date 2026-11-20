@@ -1,0 +1,297 @@
+{%- comment -%} Visually-hidden page heading keeps the homepage's h1 contract while its regions provide the visible composition. {%- endcomment -%}
+<h1 class="sr-only">{{ shop.name }}</h1>
+
+{%- liquid
+  assign hero_image = images['saree-hero-persimmon.jpg']
+  assign shop_url = routes.all_products_collection_url
+  assign colour_marigold = 'home.colours.marigold' | t
+  assign colour_peacock = 'home.colours.peacock' | t
+  assign colour_rani = 'home.colours.rani' | t
+  assign colour_mahogany = 'home.colours.mahogany' | t
+-%}
+
+{%- comment -%} HERO: full-bleed drape photograph with an oversized serif statement. The known hero image source is mirrored by snippets/lcp-preload.liquid. {%- endcomment -%}
+{%
+  block 'container',
+  class: 'relative isolate min-h-[88svh] overflow-hidden flex',
+  background_image: hero_image,
+  background_image_loading: 'eager',
+  background_image_fetchpriority: 'high',
+  background_image_sizes: '100vw',
+  attributes: 'aria-labelledby="home-hero-heading"'
+%}
+  {%- unless hero_image -%}
+    {% render 'placeholder-texture', kind: 'hero', seed: 1, class: 'absolute inset-0 aspect-auto -z-20' %}
+  {%- endunless -%}
+  <div class="pointer-events-none absolute inset-0 bg-linear-to-t from-on-surface/85 via-on-surface/30 to-transparent md:bg-linear-to-r md:from-on-surface/80 md:via-on-surface/25 md:to-transparent"></div>
+
+  <div class="relative flex w-full max-w-page mx-auto flex-col items-start justify-end px-margin pt-24 pb-14 md:pb-20 text-start text-surface">
+    {% block 'heading', tag: 'h2', variant: '2xl', class: 'max-w-[10ch] text-6xl! md:text-7xl! lg:text-8xl! leading-[0.92]! text-balance mb-6', attributes: 'id="home-hero-heading"' %}
+      {{- 'home.hero.title' | t -}}
+    {% endblock %}
+    {% block 'text', variant: 'lg', class: 'max-w-md text-lg md:text-xl text-surface/90 mb-8' %}
+      {{- 'home.hero.subtitle' | t -}}
+    {% endblock %}
+    <div class="flex flex-wrap gap-3">
+      {% block 'button', url: shop_url, variant: 'button-primary', class: 'h-12 px-7 text-base font-bold rounded-button' %}{{ 'home.hero.cta_primary' | t }}{% endblock %}
+      {% block 'button', url: '#shop-by-colour', variant: 'button-surface', class: 'h-12 px-7 text-base font-bold rounded-button' %}{{ 'home.hero.cta_secondary' | t }}{% endblock %}
+    </div>
+  </div>
+{% endblock %}
+
+{%- comment -%} SHOP BY COLOUR: four jewel panels, each mounting a drape. {%- endcomment -%}
+{% block 'container', class: 'w-full scroll-mt-20', padding: 'py-16', attributes: 'id="shop-by-colour" aria-labelledby="colour-heading"' %}
+  <div class="max-w-page mx-auto px-margin">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+      {% block 'heading', tag: 'h2', variant: 'xl', class: 'text-5xl! md:text-6xl! leading-[1.0]! max-w-[14ch] text-balance', attributes: 'id="colour-heading"' %}{{ 'home.colours.title' | t }}{% endblock %}
+      {% block 'text', variant: 'lg', class: 'max-w-xs text-on-surface/80' %}{{ 'home.colours.subtitle' | t }}{% endblock %}
+    </div>
+
+    <ul role="list" class="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3">
+      <li class="lg:translate-y-0">
+        {% block 'card', block.name: 't:blocks.collection_card', url: shop_url, aria_label: colour_marigold, link_mode: 'card', background_color: '#E9A21B', class: 'group h-full p-3 md:p-4 text-on-surface' %}
+          <div class="overflow-hidden">
+            {% block 'image', image: images['saree-persimmon-silk.jpg'], aspect_ratio: 'aspect-[3/4]', sizes: '(min-width: 1024px) 300px, 50vw', alt: colour_marigold, class: 'motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.03]', attributes: 'loading="lazy"' %}{% endblock %}
+          </div>
+          <div class="pt-4 pb-1">
+            {% block 'heading', tag: 'h3', variant: 'md', class: 'text-3xl! md:text-4xl! leading-none!' %}{{ 'home.colours.marigold' | t }}{% endblock %}
+            {% block 'text', variant: 'sm', class: 'mt-1 font-medium' %}{{ 'home.colours.marigold_note' | t }}{% endblock %}
+          </div>
+        {% endblock %}
+      </li>
+      <li class="lg:translate-y-10">
+        {% block 'card', block.name: 't:blocks.collection_card', url: shop_url, aria_label: colour_peacock, link_mode: 'card', background_color: '#0E5C55', class: 'group h-full p-3 md:p-4 text-surface' %}
+          <div class="overflow-hidden">
+            {% block 'image', image: images['saree-peacock-cotton.jpg'], aspect_ratio: 'aspect-[3/4]', sizes: '(min-width: 1024px) 300px, 50vw', alt: colour_peacock, class: 'motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.03]', attributes: 'loading="lazy"' %}{% endblock %}
+          </div>
+          <div class="pt-4 pb-1">
+            {% block 'heading', tag: 'h3', variant: 'md', class: 'text-3xl! md:text-4xl! leading-none!' %}{{ 'home.colours.peacock' | t }}{% endblock %}
+            {% block 'text', variant: 'sm', class: 'mt-1 font-medium text-surface/85' %}{{ 'home.colours.peacock_note' | t }}{% endblock %}
+          </div>
+        {% endblock %}
+      </li>
+      <li>
+        {% block 'card', block.name: 't:blocks.collection_card', url: shop_url, aria_label: colour_rani, link_mode: 'card', background_color: '#C2185B', class: 'group h-full p-3 md:p-4 text-surface' %}
+          <div class="overflow-hidden">
+            {% block 'image', image: images['saree-blush-handloom.jpg'], aspect_ratio: 'aspect-[3/4]', sizes: '(min-width: 1024px) 300px, 50vw', alt: colour_rani, class: 'motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.03]', attributes: 'loading="lazy"' %}{% endblock %}
+          </div>
+          <div class="pt-4 pb-1">
+            {% block 'heading', tag: 'h3', variant: 'md', class: 'text-3xl! md:text-4xl! leading-none!' %}{{ 'home.colours.rani' | t }}{% endblock %}
+            {% block 'text', variant: 'sm', class: 'mt-1 font-medium text-surface/85' %}{{ 'home.colours.rani_note' | t }}{% endblock %}
+          </div>
+        {% endblock %}
+      </li>
+      <li class="lg:translate-y-10">
+        {% block 'card', block.name: 't:blocks.collection_card', url: shop_url, aria_label: colour_mahogany, link_mode: 'card', background_color: '#6B1E1E', class: 'group h-full p-3 md:p-4 text-surface' %}
+          <div class="overflow-hidden">
+            {% block 'image', image: images['saree-mahogany-linen.jpg'], aspect_ratio: 'aspect-[3/4]', sizes: '(min-width: 1024px) 300px, 50vw', alt: colour_mahogany, class: 'motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.03]', attributes: 'loading="lazy"' %}{% endblock %}
+          </div>
+          <div class="pt-4 pb-1">
+            {% block 'heading', tag: 'h3', variant: 'md', class: 'text-3xl! md:text-4xl! leading-none!' %}{{ 'home.colours.mahogany' | t }}{% endblock %}
+            {% block 'text', variant: 'sm', class: 'mt-1 font-medium text-surface/85' %}{{ 'home.colours.mahogany_note' | t }}{% endblock %}
+          </div>
+        {% endblock %}
+      </li>
+    </ul>
+  </div>
+{% endblock %}
+
+{%- comment -%} FEATURED: the real collection grid, with sample sarees while the catalogue is empty. Change this expression to swap the whole region. {%- endcomment -%}
+{%- liquid
+  assign featured_collection = collections.all
+  assign featured_product_count = featured_collection.all_products_count | at_most: 6
+  assign featured_url = featured_collection.url | default: routes.all_products_collection_url
+  assign featured_product_sizes = '(min-width: 1280px) 405px, (min-width: 1024px) calc((100vw - 96px) / 3), calc((100vw - 40px) / 2)'
+-%}
+{% block 'featured-collection', collection: featured_collection, class: 'bg-surface-secondary md:py-24' %}
+  <div class="flex items-end justify-between gap-6 mb-10 max-w-page mx-auto px-margin">
+    <div class="min-w-0">
+      {% block 'heading', tag: 'h2', variant: 'xl', class: 'text-5xl! md:text-6xl! leading-[1.0]!' %}{{ 'home.featured.title' | t }}{% endblock %}
+      {% block 'text', variant: 'lg', class: 'mt-3 max-w-md text-on-surface/80' %}{{ 'home.featured.subtitle' | t }}{% endblock %}
+    </div>
+    {% block 'link', url: featured_url, class: 'shrink-0 hidden md:inline-flex' %}{{ 'collections.view_all' | t }}{% endblock %}
+  </div>
+
+  <div class="w-full max-w-page mx-auto px-margin">
+    {%- if shop.products_count == 0 -%}
+      {%- liquid
+        assign sample_url = routes.all_products_collection_url
+        assign sample_title_1 = 'home.samples.p1_title' | t
+        assign sample_title_2 = 'home.samples.p2_title' | t
+        assign sample_title_3 = 'home.samples.p3_title' | t
+        assign sample_title_4 = 'home.samples.p4_title' | t
+        assign sample_title_5 = 'home.samples.p5_title' | t
+        assign sample_title_6 = 'home.samples.p6_title' | t
+      -%}
+      <ul role="list" class="grid grid-cols-2 lg:grid-cols-3 gap-x-2 md:gap-x-4 gap-y-10 stagger-fade-in">
+        <li>
+          {% block 'card', block.name: 't:blocks.product_card', url: sample_url, aria_label: sample_title_1, border_radius: 'rounded-card', class: 'group' %}
+            <a href="{{ sample_url }}" class="relative block overflow-hidden rounded-[inherit] mb-3" tabindex="-1" aria-hidden="true">
+              {% block 'image', image: images['saree-persimmon-silk.jpg'], aspect_ratio: 'aspect-[3/4]', sizes: featured_product_sizes, class: 'motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.03]', attributes: 'loading="lazy"' %}{% endblock %}
+            </a>
+            {% block 'text', variant: 'md', tag: 'h3', class: 'font-medium' %}<a href="{{ sample_url }}" class="no-underline text-on-surface">{{ 'home.samples.p1_title' | t }}</a>{% endblock %}
+            {% block 'text', variant: 'md', class: 'font-bold mt-1' %}{{ 489000 | money }}{% endblock %}
+          {% endblock %}
+        </li>
+        <li>
+          {% block 'card', block.name: 't:blocks.product_card', url: sample_url, aria_label: sample_title_2, border_radius: 'rounded-card', class: 'group' %}
+            <a href="{{ sample_url }}" class="relative block overflow-hidden rounded-[inherit] mb-3" tabindex="-1" aria-hidden="true">
+              {% block 'image', image: images['saree-peacock-cotton.jpg'], aspect_ratio: 'aspect-[3/4]', sizes: featured_product_sizes, class: 'motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.03]', attributes: 'loading="lazy"' %}{% endblock %}
+            </a>
+            {% block 'text', variant: 'md', tag: 'h3', class: 'font-medium' %}<a href="{{ sample_url }}" class="no-underline text-on-surface">{{ 'home.samples.p2_title' | t }}</a>{% endblock %}
+            {% block 'text', variant: 'md', class: 'font-bold mt-1' %}{{ 265000 | money }}{% endblock %}
+          {% endblock %}
+        </li>
+        <li>
+          {% block 'card', block.name: 't:blocks.product_card', url: sample_url, aria_label: sample_title_3, border_radius: 'rounded-card', class: 'group' %}
+            <a href="{{ sample_url }}" class="relative block overflow-hidden rounded-[inherit] mb-3" tabindex="-1" aria-hidden="true">
+              {% block 'image', image: images['saree-mahogany-linen.jpg'], aspect_ratio: 'aspect-[3/4]', sizes: featured_product_sizes, class: 'motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.03]', attributes: 'loading="lazy"' %}{% endblock %}
+            </a>
+            {% block 'text', variant: 'md', tag: 'h3', class: 'font-medium' %}<a href="{{ sample_url }}" class="no-underline text-on-surface">{{ 'home.samples.p3_title' | t }}</a>{% endblock %}
+            {% block 'text', variant: 'md', class: 'font-bold mt-1' %}{{ 320000 | money }}{% endblock %}
+          {% endblock %}
+        </li>
+        <li>
+          {% block 'card', block.name: 't:blocks.product_card', url: sample_url, aria_label: sample_title_4, border_radius: 'rounded-card', class: 'group' %}
+            <a href="{{ sample_url }}" class="relative block overflow-hidden rounded-[inherit] mb-3" tabindex="-1" aria-hidden="true">
+              {% block 'image', image: images['saree-champagne-silk.jpg'], aspect_ratio: 'aspect-[3/4]', sizes: featured_product_sizes, class: 'motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.03]', attributes: 'loading="lazy"' %}{% endblock %}
+            </a>
+            {% block 'text', variant: 'md', tag: 'h3', class: 'font-medium' %}<a href="{{ sample_url }}" class="no-underline text-on-surface">{{ 'home.samples.p4_title' | t }}</a>{% endblock %}
+            {% block 'text', variant: 'md', class: 'font-bold mt-1' %}{{ 540000 | money }}{% endblock %}
+          {% endblock %}
+        </li>
+        <li>
+          {% block 'card', block.name: 't:blocks.product_card', url: sample_url, aria_label: sample_title_5, border_radius: 'rounded-card', class: 'group' %}
+            <a href="{{ sample_url }}" class="relative block overflow-hidden rounded-[inherit] mb-3" tabindex="-1" aria-hidden="true">
+              {% block 'image', image: images['saree-blush-handloom.jpg'], aspect_ratio: 'aspect-[3/4]', sizes: featured_product_sizes, class: 'motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.03]', attributes: 'loading="lazy"' %}{% endblock %}
+            </a>
+            {% block 'text', variant: 'md', tag: 'h3', class: 'font-medium' %}<a href="{{ sample_url }}" class="no-underline text-on-surface">{{ 'home.samples.p5_title' | t }}</a>{% endblock %}
+            {% block 'text', variant: 'md', class: 'font-bold mt-1' %}{{ 295000 | money }}{% endblock %}
+          {% endblock %}
+        </li>
+        <li>
+          {% block 'card', block.name: 't:blocks.product_card', url: sample_url, aria_label: sample_title_6, border_radius: 'rounded-card', class: 'group' %}
+            <a href="{{ sample_url }}" class="relative block overflow-hidden rounded-[inherit] mb-3" tabindex="-1" aria-hidden="true">
+              {% block 'image', image: images['saree-peacock-model.jpg'], aspect_ratio: 'aspect-[3/4]', sizes: featured_product_sizes, class: 'motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.03]', attributes: 'loading="lazy"' %}{% endblock %}
+            </a>
+            {% block 'text', variant: 'md', tag: 'h3', class: 'font-medium' %}<a href="{{ sample_url }}" class="no-underline text-on-surface">{{ 'home.samples.p6_title' | t }}</a>{% endblock %}
+            {% block 'text', variant: 'md', class: 'font-bold mt-1' %}{{ 345000 | money }}{% endblock %}
+          {% endblock %}
+        </li>
+      </ul>
+    {%- else -%}
+      <ul role="list" class="grid grid-cols-2 lg:grid-cols-3 gap-x-2 md:gap-x-4 gap-y-10 stagger-fade-in">
+        {% for product in featured_collection.products limit: featured_product_count %}
+          <li>
+            <s-view-event class="block" view-event-trigger="intersect" view-event-payload="{{ product | standard_event_data: 'view', context: 'collection' | escape }}">
+              {%- assign card_variant = product.selected_or_first_available_variant -%}
+              {% block 'card', block.name: 't:blocks.product_card', url: product.url, aria_label: product.title, border_radius: 'rounded-card', class: 'group' %}
+                <a href="{{ product.url | escape }}" class="relative block overflow-hidden rounded-[inherit] mb-3" aria-label="{{ product.title | escape }}">
+                  {% block 'image', fallback_image: product.featured_image, aspect_ratio: 'aspect-[3/4]', sizes: featured_product_sizes, alt: product.title, seed: forloop.index, class: 'motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.03]', attributes: 'loading="lazy"' %}{% endblock %}
+                </a>
+                <div class="flex flex-col gap-1">
+                  {% block 'text', variant: 'md', tag: 'h3', class: 'font-medium text-on-surface line-clamp-2' %}{{ product.title | escape }}{% endblock %}
+                  {% block 'price', price: card_variant.price, compare_at_price: card_variant.compare_at_price, price_min: product.price_min, price_max: product.price_max, class: 'text-base font-bold self-start group-[.text-center]/card:self-center group-[.text-end]/card:self-end' %}{% endblock %}
+                </div>
+              {% endblock %}
+            </s-view-event>
+          </li>
+        {% endfor %}
+      </ul>
+    {%- endif -%}
+    <div class="mt-10 md:hidden">
+      {% block 'button', url: featured_url, variant: 'button-outline', class: 'h-12 px-7 w-full text-base font-bold rounded-button' %}{{ 'collections.view_all' | t }}{% endblock %}
+    </div>
+  </div>
+{% endblock %}
+
+{%- comment -%} WEEKDAY GUIDE: five jewel-banded columns on an aubergine band. {%- endcomment -%}
+{% block 'container', class: 'w-full bg-on-surface text-surface', padding: 'py-24', attributes: 'aria-labelledby="week-heading"' %}
+  <div class="max-w-page mx-auto px-margin">
+    <div class="mb-12 max-w-2xl">
+      {% block 'heading', tag: 'h2', variant: 'xl', class: 'text-5xl! md:text-7xl! leading-[0.95]! text-balance', attributes: 'id="week-heading"' %}{{ 'home.week.title' | t }}{% endblock %}
+      {% block 'text', variant: 'lg', class: 'mt-4 text-surface/80' %}{{ 'home.week.subtitle' | t }}{% endblock %}
+    </div>
+    <ol role="list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-px bg-surface/15">
+      <li class="bg-on-surface flex flex-col">
+        <span class="block h-3 bg-[#E9A21B]" aria-hidden="true"></span>
+        <div class="p-6 flex flex-col gap-3">
+          {% block 'text', variant: 'sm', tag: 'h3', class: 'uppercase tracking-[0.14em] font-bold text-[#F5C25A]' %}{{ 'home.week.mon' | t }}{% endblock %}
+          {% block 'heading', tag: 'p', variant: 'sm', class: 'leading-tight!' %}{{ 'home.week.mon_fabric' | t }}{% endblock %}
+          {% block 'text', variant: 'sm', class: 'text-surface/75 leading-relaxed' %}{{ 'home.week.mon_note' | t }}{% endblock %}
+        </div>
+      </li>
+      <li class="bg-on-surface flex flex-col">
+        <span class="block h-3 bg-[#0E5C55]" aria-hidden="true"></span>
+        <div class="p-6 flex flex-col gap-3">
+          {% block 'text', variant: 'sm', tag: 'h3', class: 'uppercase tracking-[0.14em] font-bold text-[#5FC7B8]' %}{{ 'home.week.tue' | t }}{% endblock %}
+          {% block 'heading', tag: 'p', variant: 'sm', class: 'leading-tight!' %}{{ 'home.week.tue_fabric' | t }}{% endblock %}
+          {% block 'text', variant: 'sm', class: 'text-surface/75 leading-relaxed' %}{{ 'home.week.tue_note' | t }}{% endblock %}
+        </div>
+      </li>
+      <li class="bg-on-surface flex flex-col">
+        <span class="block h-3 bg-[#C2185B]" aria-hidden="true"></span>
+        <div class="p-6 flex flex-col gap-3">
+          {% block 'text', variant: 'sm', tag: 'h3', class: 'uppercase tracking-[0.14em] font-bold text-[#F27AA8]' %}{{ 'home.week.wed' | t }}{% endblock %}
+          {% block 'heading', tag: 'p', variant: 'sm', class: 'leading-tight!' %}{{ 'home.week.wed_fabric' | t }}{% endblock %}
+          {% block 'text', variant: 'sm', class: 'text-surface/75 leading-relaxed' %}{{ 'home.week.wed_note' | t }}{% endblock %}
+        </div>
+      </li>
+      <li class="bg-on-surface flex flex-col">
+        <span class="block h-3 bg-[#B5502B]" aria-hidden="true"></span>
+        <div class="p-6 flex flex-col gap-3">
+          {% block 'text', variant: 'sm', tag: 'h3', class: 'uppercase tracking-[0.14em] font-bold text-[#F09A73]' %}{{ 'home.week.thu' | t }}{% endblock %}
+          {% block 'heading', tag: 'p', variant: 'sm', class: 'leading-tight!' %}{{ 'home.week.thu_fabric' | t }}{% endblock %}
+          {% block 'text', variant: 'sm', class: 'text-surface/75 leading-relaxed' %}{{ 'home.week.thu_note' | t }}{% endblock %}
+        </div>
+      </li>
+      <li class="bg-on-surface flex flex-col sm:col-span-2 lg:col-span-1">
+        <span class="block h-3 bg-linear-to-r from-[#E9A21B] via-[#C2185B] to-[#0E5C55]" aria-hidden="true"></span>
+        <div class="p-6 flex flex-col gap-3">
+          {% block 'text', variant: 'sm', tag: 'h3', class: 'uppercase tracking-[0.14em] font-bold text-[#F5C25A]' %}{{ 'home.week.fri' | t }}{% endblock %}
+          {% block 'heading', tag: 'p', variant: 'sm', class: 'leading-tight!' %}{{ 'home.week.fri_fabric' | t }}{% endblock %}
+          {% block 'text', variant: 'sm', class: 'text-surface/75 leading-relaxed' %}{{ 'home.week.fri_note' | t }}{% endblock %}
+        </div>
+      </li>
+    </ol>
+  </div>
+{% endblock %}
+
+{%- comment -%} CRAFT STORY: loom photograph with a peacock panel stepping over it. {%- endcomment -%}
+{% block 'container', class: 'relative isolate overflow-hidden min-h-[80svh] flex items-end md:items-center', background_image: images['saree-loom.jpg'], background_image_sizes: '100vw', attributes: 'aria-labelledby="craft-heading"' %}
+  <div class="relative w-full max-w-page mx-auto px-margin py-16 flex md:justify-end">
+    <div class="bg-interactive text-interactive-text p-8 md:p-12 max-w-lg border-t-4 border-accent">
+      {% block 'heading', tag: 'h2', variant: 'xl', class: 'text-5xl! md:text-6xl! leading-[0.98]! text-balance', attributes: 'id="craft-heading"' %}{{ 'home.craft.title' | t }}{% endblock %}
+      {% block 'text', variant: 'lg', class: 'mt-5 leading-relaxed opacity-90' %}{{ 'home.craft.text' | t }}{% endblock %}
+      <div class="mt-8">
+        {% block 'button', url: shop_url, variant: 'button-surface', class: 'h-12 px-7 text-base font-bold rounded-button' %}{{ 'home.craft.cta' | t }}{% endblock %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{%- comment -%} PROMISE: textile close-up beside three plain-spoken reasons. {%- endcomment -%}
+{% block 'container', class: 'w-full', padding: 'py-24', attributes: 'aria-labelledby="promise-heading"' %}
+  <div class="max-w-page mx-auto px-margin grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+    <div class="lg:col-span-7 overflow-hidden">
+      {% block 'image', image: images['saree-border-detail.jpg'], aspect_ratio: 'aspect-square', sizes: '(min-width: 1024px) 700px, 100vw', class: 'md:aspect-[4/3]', attributes: 'loading="lazy"' %}{% endblock %}
+    </div>
+    <div class="lg:col-span-5">
+      {% block 'heading', tag: 'h2', variant: 'xl', class: 'text-5xl! leading-[1.0]! mb-10', attributes: 'id="promise-heading"' %}{{ 'home.promise.title' | t }}{% endblock %}
+      <ul role="list" class="flex flex-col gap-8">
+        <li class="border-t-2 border-accent pt-5">
+          {% block 'heading', tag: 'h3', variant: 'sm', class: 'text-2xl! leading-tight!' %}{{ 'home.promise.one_title' | t }}{% endblock %}
+          {% block 'text', variant: 'md', class: 'mt-2 text-on-surface/80 leading-relaxed' %}{{ 'home.promise.one_text' | t }}{% endblock %}
+        </li>
+        <li class="border-t-2 border-accent pt-5">
+          {% block 'heading', tag: 'h3', variant: 'sm', class: 'text-2xl! leading-tight!' %}{{ 'home.promise.two_title' | t }}{% endblock %}
+          {% block 'text', variant: 'md', class: 'mt-2 text-on-surface/80 leading-relaxed' %}{{ 'home.promise.two_text' | t }}{% endblock %}
+        </li>
+        <li class="border-t-2 border-accent pt-5">
+          {% block 'heading', tag: 'h3', variant: 'sm', class: 'text-2xl! leading-tight!' %}{{ 'home.promise.three_title' | t }}{% endblock %}
+          {% block 'text', variant: 'md', class: 'mt-2 text-on-surface/80 leading-relaxed' %}{{ 'home.promise.three_text' | t }}{% endblock %}
+        </li>
+      </ul>
+    </div>
+  </div>
+{% endblock %}

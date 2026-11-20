@@ -1,0 +1,112 @@
+{% block 'container' %}
+  <s-view-event class="block pb-12" view-event-trigger="connect" view-event-payload="{{ collection | standard_event_data: 'view' | escape }}">
+  <div class="bg-surface-secondary border-b-[3px] border-accent mb-10">
+    <div class="max-w-page mx-auto px-margin py-14 md:py-20">
+      {% block 'heading', tag: 'h1', variant: 'xl', class: 'text-5xl! md:text-7xl! leading-[0.95]! text-balance max-w-[16ch]' %}{{ collection.title | escape }}{% endblock %}
+      {% if collection.description != blank %}
+        <div class="richtext mt-4 max-w-xl text-on-surface/80">{{ collection.description }}</div>
+      {% endif %}
+    </div>
+  </div>
+
+<s-live-form class="block" partial="collection-count,collection-chips,collection-filters,collection-grid" debounce="300" data-collection-id="{{ collection.id }}" data-collection-handle="{{ collection.handle | escape }}" data-updated-message="{{ 'accessibility.results_updated' | t }}" data-error-message="{{ 'accessibility.update_error' | t }}">
+  <form action="{{ collection.url }}" method="get" role="search" aria-label="{{ 'collections.filter' | t }}">
+    {% capture collection_filter_trigger %}
+      {% block 'button', commandfor: 'collection-filter-drawer', command: 'show-modal', variant: 'button-outline', class: 'h-11 px-4 text-sm rounded-button' %}{{ 'collections.filter' | t }}{% endblock %}
+    {% endcapture %}
+    {% capture collection_toolbar_submit %}
+      {% block 'button', type: 'submit', class: 'h-11 px-4 rounded-button' %}{{ 'collections.show_results' | t }}{% endblock %}
+    {% endcapture %}
+
+    {% capture collection_filter_close_button %}
+      {%- capture close_attrs -%}aria-label="{{ 'general.close' | t }}"{%- endcapture -%}
+      {% block 'button', commandfor: 'collection-filter-drawer', command: 'close', variant: 'button-ghost', class: 'size-touch-target rounded', autofocus: true, attributes: close_attrs %}<span class="inline-flex items-center justify-center size-5" aria-hidden="true">{{- 'icon-x.svg' | inline_asset_content -}}</span>{% endblock %}
+    {% endcapture %}
+    {% capture collection_results_button %}
+      {% block 'button', commandfor: 'collection-filter-drawer', command: 'close', variant: 'button-primary', class: 'h-11 w-full rounded-button' %}{{ 'collections.show_results' | t }}{% endblock %}
+    {% endcapture %}
+    {% capture collection_drawer_submit %}
+      {% block 'button', type: 'submit', class: 'h-11 w-full rounded-button' %}{{ 'collections.show_results' | t }}{% endblock %}
+    {% endcapture %}
+    {% render 'filters', page_type: 'collection', resource: collection, drawer_id: 'collection-filter-drawer', filter_trigger: collection_filter_trigger, toolbar_submit: collection_toolbar_submit, close_button: collection_filter_close_button, show_results_button: collection_results_button, drawer_submit: collection_drawer_submit %}
+
+    {% partial 'collection-grid' %}
+{% paginate collection.products by 20 %}
+  {% if collection.products.size > 0 %}
+    <h2 class="sr-only">{{ 'collections.products_heading' | t }}</h2>
+    {%- comment -%} Account for the 1280px page cap, 16/40px gutters, and 4px column gaps; mirror in snippets/lcp-preload.liquid. {%- endcomment -%}
+    {%- assign product_sizes = '(min-width: 1280px) 405px, (min-width: 1024px) calc((100vw - 96px) / 3), calc((100vw - 40px) / 2)' -%}
+    <div class="w-full max-w-page mx-auto px-margin contain-paint">
+      <ul id="product-grid" role="list" class="grid grid-cols-2 lg:grid-cols-3 gap-x-2 md:gap-x-4 gap-y-10 mb-8 stagger-fade-in">
+        {% for product in collection.products %}
+          <li>
+            {%- comment -%} The four-slot eager threshold matches one large-screen row; only slot one competes at high priority for LCP, while the remaining eager row stays low priority. {%- endcomment -%}
+            {%- if forloop.index <= 4 -%}{%- assign lazy_load = false -%}{%- else -%}{%- assign lazy_load = true -%}{%- endif -%}
+            {%- if forloop.first -%}{%- assign fetch_priority = 'high' -%}{%- elsif forloop.index <= 4 -%}{%- assign fetch_priority = 'low' -%}{%- else -%}{%- assign fetch_priority = 'auto' -%}{%- endif -%}
+            <s-view-event class="block" view-event-trigger="intersect" view-event-payload="{{ product | standard_event_data: 'view', context: 'collection' | escape }}">
+              {%- liquid
+                assign card_variant = product.selected_or_first_available_variant
+                if lazy_load
+                  assign card_loading = 'lazy'
+                else
+                  assign card_loading = 'eager'
+                endif
+                assign card_image_attributes = 'loading="' | append: card_loading | append: '" fetchpriority="' | append: fetch_priority | append: '"'
+              -%}
+              {% block 'card', block.name: 't:blocks.product_card', url: product.url, aria_label: product.title, border_radius: 'rounded-card' %}
+                <a href="{{ product.url | escape }}" class="relative block overflow-hidden rounded-[inherit]" aria-label="{{ product.title | escape }}">
+                  {% block 'image', fallback_image: product.featured_image, aspect_ratio: 'aspect-[3/4]', sizes: product_sizes, attributes: card_image_attributes, alt: product.title, seed: forloop.index %}{% endblock %}
+                </a>
+                <div class="flex flex-col gap-0.5">
+                  {% block 'text', variant: 'sm', tag: 'h3', class: 'font-medium text-on-surface line-clamp-2' %}{{ product.title | escape }}{% endblock %}
+                  {%- comment -%} Text alignment inherits from the shell; the flex price needs its own logical self alignment. {%- endcomment -%}
+                  {% block 'price', price: card_variant.price, compare_at_price: card_variant.compare_at_price, price_min: product.price_min, price_max: product.price_max, class: 'text-sm font-medium self-start group-[.text-center]/card:self-center group-[.text-end]/card:self-end' %}{% endblock %}
+                </div>
+              {% endblock %}
+            </s-view-event>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="max-w-page mx-auto px-margin">
+      {% block 'pagination', paginate: paginate %}{% endblock %}
+    </div>
+  {% elsif shop.products_count == 0 %}
+    {%- liquid
+      assign sample_images = 'saree-persimmon-silk.jpg,saree-peacock-cotton.jpg,saree-mahogany-linen.jpg,saree-champagne-silk.jpg,saree-blush-handloom.jpg,saree-peacock-model.jpg' | split: ','
+      assign sample_prices = '489000,265000,320000,540000,295000,345000' | split: ','
+      assign sample_url = routes.all_products_collection_url
+    -%}
+    <div class="w-full max-w-page mx-auto px-margin">
+      <ul role="list" class="grid grid-cols-2 lg:grid-cols-3 gap-x-2 md:gap-x-4 gap-y-10 mb-8 stagger-fade-in">
+        {%- for sample_image in sample_images -%}
+          {%- liquid
+            assign sample_key = 'home.samples.p' | append: forloop.index | append: '_title'
+            assign sample_title = sample_key | t
+            assign sample_price = sample_prices[forloop.index0] | plus: 0
+          -%}
+          <li>
+            {% block 'card', block.name: 't:blocks.product_card', url: sample_url, aria_label: sample_title, border_radius: 'rounded-card', class: 'group' %}
+              <a href="{{ sample_url }}" class="relative block overflow-hidden rounded-[inherit] mb-3" tabindex="-1" aria-hidden="true">
+                {% block 'image', fallback_image: images[sample_image], aspect_ratio: 'aspect-[3/4]', sizes: '(min-width: 1280px) 405px, (min-width: 1024px) calc((100vw - 96px) / 3), calc((100vw - 40px) / 2)', class: 'motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.03]', attributes: 'loading="lazy"' %}{% endblock %}
+              </a>
+              {% block 'text', variant: 'md', tag: 'h3', class: 'font-medium' %}<a href="{{ sample_url }}" class="no-underline text-on-surface">{{ sample_title }}</a>{% endblock %}
+              {% block 'text', variant: 'md', class: 'font-bold mt-1' %}{{ sample_price | money }}{% endblock %}
+            {% endblock %}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  {% else %}
+    {% block 'text', variant: 'md', class: 'text-on-surface-secondary py-12 text-center max-w-page mx-auto px-margin' %}{{ 'collections.no_products' | t }}{% endblock %}
+  {% endif %}
+{% endpaginate %}
+    {% endpartial %}
+  </form>
+</s-live-form>
+</s-view-event>
+
+<script type="application/ld+json">
+  {{ collection | structured_data }}
+</script>
+{% endblock %}

@@ -1,0 +1,25 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "color_palette": {
+      "surface": "#FFF6EA",
+      "on_surface": "#2B0A1E",
+      "surface_2": "#FBE3C4",
+      "accent": "#C2185B",
+      "interactive": "#0E5C55"
+    },
+    "type_primary_font": "karla_n4",
+    "type_heading_font": "dm_serif_display_n4",
+    "border_radius_buttons": "pill",
+    "border_radius_cards": "sharp",
+    "border_radius_forms": "rounded"
+  }
+}

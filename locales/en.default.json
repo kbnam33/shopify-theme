@@ -1,0 +1,310 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "404": {
+    "title": "404",
+    "title_accessible": "404 — Page not found",
+    "not_found": "Page not found.",
+    "back_to_shopping": "Shop everyday sarees",
+    "suggestions_heading": "This drape slipped away.",
+    "recovery_body": "The page you were looking for isn't here, but there's plenty of colour left to explore."
+  },
+  "general": {
+    "skip_to_content": "Skip to content",
+    "play_video": "Play video",
+    "video_player": "Video player",
+    "captions": "Captions",
+    "clear": "Clear",
+    "back": "Back",
+    "close": "Close",
+    "dismiss": "Dismiss",
+    "drawer": "Drawer",
+    "placeholder_image": "Placeholder image",
+    "account": "Account",
+    "search": "Search",
+    "pagination": {
+      "label": "Pagination",
+      "previous_page": "Previous page",
+      "next_page": "Next page",
+      "page": "Page {{ number }}",
+      "current_page": "Page {{ number }}, current page"
+    },
+    "meta": {
+      "tagged": "tagged \"{{ tags }}\"",
+      "page": "Page {{ number }}"
+    }
+  },
+  "accessibility": {
+    "results_updated": "Results updated",
+    "variant_updated": "Selection updated",
+    "update_error": "An error occurred. Please try again."
+  },
+  "blog": {
+    "articles_heading": "Articles",
+    "article_metadata_html": "<time datetime=\"{{ datetime }}\">{{ date }}</time> · {{ author }}",
+    "article_metadata_no_author_html": "<time datetime=\"{{ datetime }}\">{{ date }}</time>",
+    "comment_form_body": "Comment",
+    "comment_form_email": "Email",
+    "comment_form_name": "Name",
+    "comment_form_submit": "Post",
+    "comment_form_title": "Add a comment",
+    "comments_count": {
+      "one": "1 comment",
+      "other": "{{ count }} comments"
+    },
+    "no_articles": "No articles yet."
+  },
+  "cart": {
+    "checkout": "Checkout",
+    "title": "Cart",
+    "remove": "Remove: {{ title }}",
+    "empty": "Your cart is empty.",
+    "empty_description": "Looks like you haven't added anything to your cart yet.",
+    "icon_label": {
+      "one": "Cart (1 item)",
+      "other": "Cart ({{ count }} items)"
+    },
+    "item_count": {
+      "one": "1 item in cart",
+      "other": "{{ count }} items in cart"
+    },
+    "item_removed": "Item removed from cart",
+    "updated": "Cart updated",
+    "note_label": "Order notes",
+    "note_placeholder": "Add special instructions for your order",
+    "taxes_and_shipping_at_checkout": "Taxes and shipping calculated at checkout",
+    "discount_list": "Applied discounts",
+    "discount_savings": "(-{{ amount }})",
+    "discount_code": "Discount code",
+    "discount_title": "Discount: {{ title }}",
+    "update_error": "Could not update cart. Please try again.",
+    "refresh_error": "Cart updated, but the display may be out of date. Refresh the page to see the latest cart.",
+    "continue_shopping": "Continue shopping",
+    "checkout_description": "Proceeds to secure checkout",
+    "discount_placeholder": "Enter code",
+    "discount_apply": "Apply",
+    "note_accordion_label": "Special instructions",
+    "total_label": "Estimated total"
+  },
+  "contact": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone (optional)",
+    "message": "Message",
+    "submit": "Send message",
+    "success": "Thank you for reaching out. We'll be in touch soon."
+  },
+  "collections": {
+    "all_collections": "All collections",
+    "browse_heading": "Browse collections",
+    "products_heading": "Products",
+    "placeholder_title": "Collection title",
+    "no_collections": "No collections found.",
+    "no_products": "No products found.",
+    "products_count": {
+      "one": "1 product",
+      "other": "{{ count }} products"
+    },
+    "filter": "Filter",
+    "filters": "Filters",
+    "active_filters": "Active filters",
+    "clear_all": "Clear all",
+    "remove_filter": "Remove {{ filter }}",
+    "show_results": "Show results",
+    "value_unavailable": "Unavailable",
+    "price_min": "Min price",
+    "price_max": "Max price",
+    "price_to": "to",
+    "sort_by": "Sort by",
+    "filtering": {
+      "show_more": "Show more"
+    },
+    "view_all": "View all"
+  },
+  "header": {
+    "menu": "Menu",
+    "mobile_navigation": "Mobile navigation",
+    "navigation": "Main navigation",
+    "show_submenu": "Show submenu for {{ title }}"
+  },
+  "footer": {
+    "quick_links": "Quick links",
+    "policies": "Policies",
+    "tagline": "Everyday sarees, in every colour."
+  },
+  "gift_card": {
+    "add_to_apple_wallet": "Add to Apple Wallet",
+    "card": "Gift card",
+    "expired": "This gift card has expired",
+    "expires_on": "Expires on {{ expires_on }}",
+    "use_at_checkout": "Use this gift card at checkout",
+    "a_gift_for_you": "A gift for you",
+    "available": "{{ amount }} available",
+    "a_little_something": "A little something for you",
+    "card_label": "{{ shop }} gift card",
+    "copy_code": "Copy code",
+    "copied": "Code copied",
+    "copy_error": "Couldn’t copy automatically. Copy the code manually.",
+    "disabled": "This gift card is no longer valid",
+    "start_shopping": "Start shopping"
+  },
+  "page": {
+    "content_heading": "Page content"
+  },
+  "password": {
+    "title": "This shop is private",
+    "eyebrow": "Opening soon",
+    "launch_description": "Get an early look at what's next.",
+    "enter": "Enter",
+    "enter_with_password": "Enter with password",
+    "enter_store": "Enter store",
+    "show": "Show",
+    "hide": "Hide",
+    "error": "Incorrect password. Please try again.",
+    "field_label": "Password",
+    "placeholder": "Enter password",
+    "get_updates": "Get opening updates",
+    "updates_description": "Be the first to know when we open.",
+    "updates_submit": "Notify me",
+    "updates_success": "Thanks for subscribing."
+  },
+  "product": {
+    "details": "Product details",
+    "placeholder_title": "Product title",
+    "quantity": "Quantity",
+    "quantity_decrease": "Decrease quantity: {{ title }}",
+    "quantity_increase": "Increase quantity: {{ title }}",
+    "quantity_input": "Quantity for {{ title }}",
+    "add_to_cart": "Add to cart",
+    "added_to_cart": "Added to cart",
+    "sold_out": "Sold out",
+    "description": "Description",
+    "view_image": "View image: {{ title }}",
+    "image_zoom": "Expanded product image"
+  },
+  "products": {
+    "price": {
+      "price": "Price",
+      "price_range_html": "{{ min }} – {{ max }}",
+      "price_range_label": "Price range",
+      "regular_price": "Regular price",
+      "sale_price": "Sale price",
+      "savings": "Save {{ amount }}"
+    },
+    "quantity": {
+      "decrease": "Decrease quantity",
+      "increase": "Increase quantity",
+      "input_label": "Quantity"
+    }
+  },
+  "filters": {
+    "active_count": {
+      "one": "1 active filter",
+      "other": "{{ count }} active filters"
+    }
+  },
+  "forms": {
+    "required": "required",
+    "form_errors_title": "Please fix the following errors:"
+  },
+  "search": {
+    "title": "Search",
+    "label": "Search",
+    "placeholder": "Search",
+    "products_heading": "Products",
+    "results_heading": "Search results",
+    "view_all_results": "View all results",
+    "results_count_announcement": {
+      "one": "1 result available",
+      "other": "{{ count }} results available"
+    },
+    "no_results_announcement": "No results found for {{ terms }}",
+    "results_for": "{{ count }} results found for {{ terms }}",
+    "no_results": "No results found for {{ terms }}",
+    "live_results_announcement": {
+      "one": "{{ count }} result found for {{ terms }}",
+      "other": "{{ count }} results found for {{ terms }}"
+    },
+    "live_no_results_announcement": "No results found for {{ terms }}"
+  },
+  "localization": {
+    "form_label": "Region and language",
+    "language": "Language",
+    "country_region_currency": "Country/region and currency",
+    "update_language": "Update"
+  },
+  "home": {
+    "hero": {
+      "title": "Colour for every weekday.",
+      "subtitle": "Handwoven cottons, linens and silk-blends made for the office, the commute and everything after.",
+      "cta_primary": "Shop everyday sarees",
+      "cta_secondary": "Find your colour"
+    },
+    "colours": {
+      "title": "Pick a colour, not a dress code.",
+      "subtitle": "Every drape starts with a colour. Choose yours.",
+      "marigold": "Marigold",
+      "marigold_note": "Bright mornings",
+      "peacock": "Peacock",
+      "peacock_note": "Boardroom calm",
+      "rani": "Rani pink",
+      "rani_note": "Lunch-date bold",
+      "mahogany": "Mahogany",
+      "mahogany_note": "Late-meeting warm",
+      "shop": "Shop the colour"
+    },
+    "featured": {
+      "title": "This week's drapes",
+      "subtitle": "Light enough for a full day, bright enough to be remembered."
+    },
+    "samples": {
+      "p1_title": "Persimmon Banarasi silk-cotton saree",
+      "p2_title": "Peacock Chanderi cotton saree",
+      "p3_title": "Mahogany khadi linen saree",
+      "p4_title": "Champagne tissue silk saree",
+      "p5_title": "Blush Maheshwari handloom saree",
+      "p6_title": "Emerald zari cotton-silk saree",
+      "p1_desc": "A glowing persimmon silk-cotton with woven paisley buttis and a deep border. Light enough for a full working day, polished enough for the evening that follows. Comes with an unstitched blouse piece."
+    },
+    "week": {
+      "title": "Monday to Friday, sorted.",
+      "subtitle": "A drape for every day of the working week.",
+      "mon": "Monday",
+      "mon_fabric": "Crisp cotton",
+      "mon_note": "Starts the week sharp and stays breathable through back-to-back calls.",
+      "tue": "Tuesday",
+      "tue_fabric": "Soft linen",
+      "tue_note": "Relaxed drape, clean lines, zero fuss on the commute.",
+      "wed": "Wednesday",
+      "wed_fabric": "Chanderi",
+      "wed_note": "Sheer and light, made for the mid-week presentation.",
+      "thu": "Thursday",
+      "thu_fabric": "Silk-cotton",
+      "thu_note": "A little sheen for client lunches and team dinners.",
+      "fri": "Friday",
+      "fri_fabric": "Bold handloom",
+      "fri_note": "The brightest colour in your wardrobe, straight into the weekend."
+    },
+    "craft": {
+      "title": "Woven slow. Worn daily.",
+      "text": "Every saree begins on a handloom, thread by thread, in the hands of weavers who have done this for generations. We choose weaves that drape easily, wash well and make an ordinary day feel a little special.",
+      "cta": "Meet the drapes"
+    },
+    "promise": {
+      "title": "Made for real days",
+      "one_title": "Breathable weaves",
+      "one_text": "Cottons and linens that stay comfortable from the morning commute to the last meeting.",
+      "two_title": "Easy to drape",
+      "two_text": "Soft, pliable fabrics that pleat neatly in minutes, even on a busy morning.",
+      "three_title": "Blouse piece included",
+      "three_text": "Every saree comes with matching fabric so your look is complete."
+    }
+  }
+}
